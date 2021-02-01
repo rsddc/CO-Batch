@@ -1,0 +1,55 @@
+DECLARE
+i number :=100
+case_no number :=1;
+BEGIN
+WHILE i<=10000 LOOP
+	insert into co_triggers(trg_id,case_num,create_dt,trg_status,update_dt) values 
+	(trg_id,case_no,sysdate,'p',null);
+	trg_id=trg_id+1;
+	case_no =case_no+1;
+END LOOP;
+END/
+
+========================================================================
+========MySQL=====================
+CREATE PROCEDURE saveAll()
+BEGIN
+declare i int default 1;
+declare trg_id int default 100;
+declare case_no int default 1;
+WHILE i<=10000 DO
+	insert into co_triggers(trg_id,case_num,create_dt,trg_status,update_dt) values 
+	(trg_id,case_no,sysdate(),'p',null);
+    set i=i+1;
+	SET trg_id=trg_id+1;
+	SET case_no =case_no+1;
+END WHILE;
+END
+========MySQL=====================
+
+USE `ies`;
+DROP procedure IF EXISTS `saveAll`;
+
+DELIMITER $$
+USE `ies`$$
+CREATE PROCEDURE saveAll()
+
+BEGIN
+declare i int default 1;
+declare trg_id int default 100;
+declare case_no int default 1;
+WHILE i<=10000 DO
+	insert into co_triggers(trg_id,case_num,create_dt,trg_status,update_dt) values 
+	(trg_id,case_no,sysdate(),'p',null);
+    set i=i+1;
+	SET trg_id=trg_id+1;
+	SET case_no =case_no+1;
+END WHILE;
+END;$$
+
+DELIMITER ;
+
+
+============================================
+call ies.saveAll();
+===========================================

@@ -1,0 +1,13 @@
+create procedure SaveInELG_DTLS()
+
+BEGIN
+	DECLARE i int default 1;
+	DECLARE ed_trace_id int default 1;
+	DECLARE case_no int default 1;
+	WHILE i<10000 DO
+		insert into eligibility_details values(ED_TRACE_ID,600.0,case_no,CURDATE(),null,null,'SNAP',CURDATE(),'AP',null);
+		    set i=i+1;
+		    SET ED_TRACE_ID=ED_TRACE_ID+1;
+	            SET case_no =case_no+1;
+       END WHILE;
+END
